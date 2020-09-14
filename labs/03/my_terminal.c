@@ -5,6 +5,13 @@
 #include <sys/wait.h>
 #include <errno.h>
 
+//void printDir(){
+//	char cwd[1024];
+//	getcwd(cwd, sizeof(cwd));
+//	printf("%s",cwd);
+//	printf(" $ \n");
+//}
+
 void type_prompt(){
 	static int first=1;
 	if(first){
@@ -15,7 +22,10 @@ void type_prompt(){
 		write(STDOUT_FILENO, CLEAR_SCREEN_ANSI,12);
 		first=0; //variable set 0 so it wont do it again
 	}
-	printf("#"); //display prompt
+	//to print current directory
+	char cwd[1024];
+	getcwd(cwd, sizeof(cwd));
+	printf("# %s $ ", cwd); //display prompt
 }
 
 void read_command(char command[], char *param[]){
