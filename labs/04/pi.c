@@ -44,7 +44,7 @@ void *monte_carlo_pi(void *t_id){
     for(i=0; i<work_per_thread; i++){
         x = r2();
         y = r2();
-        if( sqrt(pow((x-.5),2)+pow((y-.5),2) <= .5)
+        if( sqrt(pow((x-.5),2)+pow((y-.5),2) )<= .5)
             *count_in += 1;
     }
     pthread_exit((void *) count_in);
