@@ -13,16 +13,16 @@ import matplotlib.pyplot as plt
 
 def printInfo():
     print ("Quantums") 
-    print quantums
+    print (quantums)
     print ("Avg Turnaround times:") 
-    print avg_turnaround_tms
+    print (avg_turnaround_tms)
     print ("Context Switches") 
-    print context_switches
+    print (context_switches)
     print("Initial processes")
-    print processes
+    print (processes)
 
-quantum = input("Enter the initial quantum: ")
-quantum_max = input("Enter the final quantum: ")
+quantum = int(input("Enter the initial quantum: "))
+quantum_max = int(input("Enter the final quantum: "))
 quantums = []
 
 context_switches = []
@@ -48,23 +48,23 @@ while quantum <= quantum_max:
 
         if max_process_size < processes[i]:
             max_process_size = processes[i]
-            print max_process_size
+            print (max_process_size)
 
-        if processes[i] <= quantum:
+        if int(processes[i]) <= int(quantum):
             print("process executed")
             execution_time += processes[i]
             print("execution time " + str(execution_time))
         else:
             print("process interrupted")
-            remain_time = processes[i] - quantum
+            remain_time = int(processes[i]) - int(quantum)
             context_switchs += 1
             print("time process executed: "+ str(quantum))
-            execution_time+=quantum
+            execution_time+=int(quantum)
             execution_time+=context_switch
             print("execution time " + str(execution_time))
             processes.append(remain_time)
 
-        print processes
+        print (processes)
         print
         i += 1
 
