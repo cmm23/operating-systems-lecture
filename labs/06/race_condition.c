@@ -5,10 +5,12 @@
 
 #define NITER 1000000
 
+pthread_mutex_t lock;
 int cnt = 0;
 
 void * Count(void * a)
 {
+	pthread_mutex_lock(&lock);
     int i, tmp;
     for(i = 0; i < NITER; i++)
     {
@@ -16,11 +18,16 @@ void * Count(void * a)
         tmp = tmp+1;    /* increment the local copy */
         cnt = tmp;      /* store the local value into the global cnt */ 
     }
+    pthread_mutex_unlock(&lock);
 }
 
 int main(int argc, char * argv[])
 {
     pthread_t tid1, tid2;
+    
+    if(pthread_mutex_init(&lock,NULL)!=0){
+    	return 1;
+    }
 
     if(pthread_create(&tid1, NULL, Count, NULL))
     {

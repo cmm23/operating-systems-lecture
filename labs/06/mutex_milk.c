@@ -58,12 +58,17 @@ int main(void){
     pthread_t thread[cashier];                                      /* Creates array of cashiers                                            */
 
     int i;
+    int rc;
     
     /*
     *   Create the threads up to cashier
     */
     for(i = 0; i < cashier; i++){
-        pthread_create(&thread[i], NULL, threadfunc, (void *) (intptr_t) (i+1));
+        rc = pthread_create(&thread[i], NULL, threadfunc, (void *) (intptr_t) (i+1));
+        if(rc){
+        	printf("ERROR CREATING THREADS \n");
+        	return 1;
+        }
     }
     
     /*
